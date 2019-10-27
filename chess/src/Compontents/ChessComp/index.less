@@ -1,0 +1,22 @@
+@import '../../index.less';
+.chess {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  &-red {
+    background: radial-gradient(#fff, red);
+  }
+  &-black {
+    background: radial-gradient(#fff, black);
+  }
+  &-box {
+    width: @chess-box-size;
+    height: @chess-box-size;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
