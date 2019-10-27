@@ -1,4 +1,4 @@
-#### 井子棋游戏
+#### 五子棋游戏
 
 #### 使用 create-react-app 脚手架搭建
 
@@ -15,6 +15,7 @@ npm run dev
 npm run build
 
 ```
+
 
 
 #### 使用ts 能解决的问题

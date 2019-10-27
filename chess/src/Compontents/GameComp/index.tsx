@@ -2,6 +2,7 @@ import React from 'react'
 import { ChessTypes, GameState} from '../../types/enums'
 import { ChessBoxComp } from '../ChessBoxComp'
 import './index.less'
+import { GameStatus } from '../GameStatus'
 interface IState {
   chesses: ChessTypes[]
   gameState: GameState
@@ -12,16 +13,14 @@ interface IState {
 
 export class GameComp extends React.Component<{}, IState> {
   render () {
-    const nextChessIsRed = this.state.nextChess === ChessTypes.red
     return (
       <div className="game">
         <div className="button-group">
           <button className="button" onClick={() => this.handleWidthChange(10)}>10</button>
           <button className="button" onClick={() => this.handleWidthChange(20)}>20</button>
-          <button className="button" onClick={() => this.handleWidthChange()}>reStart</button>
+          <button className="button" onClick={() => this.handleWidthChange()}>ReStart</button>
         </div>
-        {/* <title>{this.state.nextChess}</title> */}
-        <div className="head">{ nextChessIsRed ? '红方下棋' : '黑方下棋' }</div>
+        <GameStatus status={this.state.gameState} nextChess={this.state.nextChess}></GameStatus>
         <ChessBoxComp 
           chesses={this.state.chesses} 
           isGameOver={this.state.gameState !== GameState.gaming}
@@ -83,7 +82,7 @@ export class GameComp extends React.Component<{}, IState> {
     let sum = 1
     const width = this.state.width
     for (let i = 1; i < 5; i++) {
-      if (index % width === 9) {
+      if (index % width === width - 1) {
         break
       }
       if (chesses[index] === chesses[index + i]) {
@@ -91,7 +90,7 @@ export class GameComp extends React.Component<{}, IState> {
       } else {
         break
       }
-      if ((index + i) % width === 9) {
+      if ((index + i) % width === width - 1) {
         break
       }
     }
@@ -108,7 +107,7 @@ export class GameComp extends React.Component<{}, IState> {
         break
       }
     }
-    // console.log('sum:',sum)
+    console.log('sum:',sum)
     if (sum === 5) {
       return true
     } else {
@@ -208,15 +207,12 @@ export class GameComp extends React.Component<{}, IState> {
     let checkRes = this.getCheckRes(chesses, index)
     if (checkHor || checkVer || checkSkim || checkRes) {
       if (chesses[index] === ChessTypes.red) {
-        alert('红方胜利')
         return GameState.redWin
       } else {
-        alert('黑方胜利')
         return GameState.blackWin
       }
     }
     if (this.state.currentLenght === this.state.width * this.state.width - 1) {
-      alert('平局')
       return GameState.equal
     } else {
       return GameState.gaming
