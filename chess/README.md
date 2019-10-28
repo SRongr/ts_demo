@@ -4,12 +4,14 @@
 
 #### 加入typescript
 
+#### 加入Less Css预处理器
+
 #### 运行
 ```
 npm install 
-npm run dev
-
+npm start
 ```
+
 #### build
 ```
 npm run build
@@ -22,5 +24,3 @@ npm run build
 
 - 交互： 某个组件需要传递哪些属性， 分别是什么类型， 组件事件传递的参数
 - 类型检查 编译的时候报错
-
-#### 
